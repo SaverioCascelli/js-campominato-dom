@@ -77,24 +77,23 @@ function createBox(boxPerRow){
  * @returns 
  */
 function randomBombSpot(arr){
-    if (arr.length > BOMBS) return "Error arr > Bombs"
+    if (arr.length < BOMBS) return "Error arr > Bombs"
 
     const bombSpotArr = [];
     
     while (bombSpotArr.length < BOMBS){
         let ran = random(1, arr.length);
-        if(bombSpotArr.includes(ran)){
-            
-            
-        }else{
+        if(!bombSpotArr.includes(ran)){
             bombSpotArr.push(ran);
-            
         }
        
     }
     return bombSpotArr;
 }
 
+let arris = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10];
+
+console.log("arris" , randomBombSpot(arris));
 
 /**
  * return a random number between min and max (included)

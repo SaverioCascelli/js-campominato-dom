@@ -73,15 +73,22 @@ function createBox(boxPerRow){
                 bombBox.classList.add("bg-danger");
             }
 
-            const freeze = document.createElement("div");
-            freeze.classList.add("sc-freeze");
-            colBox.append(freeze);
+            freeze();
 
         }else{
         div.classList.add("bg-primary")
     }
     })
     return div
+}
+
+/**
+ * freeze the game adding a invisible layer in html 
+ */
+function freeze(){
+    const freeze = document.createElement("div");
+    freeze.classList.add("sc-freeze");
+    colBox.append(freeze);
 }
 
 /**

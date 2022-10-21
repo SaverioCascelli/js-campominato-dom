@@ -64,14 +64,19 @@ function createBox(boxPerRow){
     div.style.width = calcCssWidth(boxPerRow)
     addSequentialNumber(div);
     setNumber(div);
-    div.addEventListener("mouseover", function(){
+    div.addEventListener("click", function()
+    {
         if(isBomb(this)){
             const bombArr= getAllBomb();
             for(let i = 0; i< bombArr.length; i++){
                 const bombBox = getBoxByNumber(bombArr[i]);
                 bombBox.classList.add("bg-danger");
             }
-            div.classList.add("bg-danger");
+
+            const freeze = document.createElement("div");
+            freeze.classList.add("sc-freeze");
+            colBox.append(freeze);
+
         }else{
         div.classList.add("bg-primary")
     }

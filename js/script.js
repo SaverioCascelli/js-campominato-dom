@@ -66,6 +66,11 @@ function createBox(boxPerRow){
     setNumber(div);
     div.addEventListener("mouseover", function(){
         if(isBomb(this)){
+            const bombArr= getAllBomb();
+            for(let i = 0; i< bombArr.length; i++){
+                const bombBox = getBoxByNumber(bombArr[i]);
+                bombBox.classList.add("bg-danger");
+            }
             div.classList.add("bg-danger");
         }else{
         div.classList.add("bg-primary")
@@ -74,7 +79,10 @@ function createBox(boxPerRow){
     return div
 }
 
-
+/**
+ * 
+ * @returns an array of all bombs position
+ */
 function getAllBomb(){
     const arrBox = getBoxArr();
     const bombs =[];

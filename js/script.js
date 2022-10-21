@@ -15,6 +15,9 @@
 const colBox = document.querySelector(".col"); 
 const initBtn = document.querySelector("header button");
 const BOMBS = 16;
+const scoreP = document.getElementById("score-p");
+const scoreRow = document.querySelector(".row:last-child");
+let score = 0;
 
 
 /**
@@ -26,6 +29,8 @@ const BOMBS = 16;
 initBtn.addEventListener("click", function(){
     const selectOption = parseInt(document.querySelector("header select").value);
     colBox.innerHTML="";
+    score = 0;
+    scoreRow.classList.add("d-none");
     switch (selectOption){
         case 1:
             init(100, 10);
@@ -77,6 +82,9 @@ function createBox(boxPerRow){
 
         }else{
         div.classList.add("bg-primary")
+        scoreRow.classList.remove("d-none");
+        score++;
+        scoreP.textContent = `Punteggio : ${score}`;
     }
     })
     return div

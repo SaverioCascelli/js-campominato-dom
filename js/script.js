@@ -50,6 +50,7 @@ function init(numberOfBox, boxInRow){
         colBox.append(createBox(boxInRow));
     }
     setUpBombs();
+    console.log("posizione bombe " ,getAllBomb());
 }
 
 /**
@@ -63,11 +64,28 @@ function createBox(boxPerRow){
     div.style.width = calcCssWidth(boxPerRow)
     addSequentialNumber(div);
     setNumber(div);
-    div.addEventListener("click", function(){
-        console.log(this.number);
+    div.addEventListener("mouseover", function(){
+        if(isBomb(this)){
+            div.classList.add("bg-danger");
+        }else{
         div.classList.add("bg-primary")
+    }
     })
     return div
+}
+
+
+function getAllBomb(){
+    const arrBox = getBoxArr();
+    const bombs =[];
+    for(let i = 0; i< arrBox.length; i++){
+        if(isBomb(arrBox[i])){
+        bombs.push(arrBox[i].number);
+        }
+    
+    }
+
+    return bombs;
 }
 
 
@@ -102,7 +120,11 @@ function random(min, max){
     return Math.floor(Math.random() * (max- min +1) + 1);
 }
 
-
+/**
+ * take arr of box
+ * create a random array of bomb position
+ * set up bombs in box ??attribute??
+ */
 function setUpBombs(){
     let boxArr = getBoxArr();
     let bombArr = randomBombSpot(boxArr);
@@ -112,6 +134,19 @@ function setUpBombs(){
     }
 }
 
+/**
+ * given a box , return true if it's a bomb
+ * @param {box} box 
+ * @returns 
+ */
+function isBomb(box){
+    return box.bomb;
+}
+
+/**
+ * 
+ * @returns return an arr of box class
+ */
 function getBoxArr(){
     return document.getElementsByClassName("box");
 }
@@ -122,7 +157,7 @@ function getBoxArr(){
  * @returns 
  */
 function getBoxByNumber(number){
-    const arr = document.getElementsByClassName("box");
+    const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         if (number === arr[i].number){
             return arr[i];
@@ -155,7 +190,7 @@ function getNumber(item){
  * @returns the last item.value +1 , or 0 if there are not
  */
 function getLastNumber(className){
-    const arr = document.getElementsByClassName(className);
+    const arr = getBoxArr();
     const lastItem = arr[arr.length-1];
     
     return lastItem ? getNumber(lastItem) : 0
@@ -172,7 +207,7 @@ function addSequentialNumber(item){
  * @param {class} className 
  */
 function addNumbers(className){
-    const arr = document.getElementsByClassName(className);
+    const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         arr[i].number = i+1;
     }
@@ -183,7 +218,7 @@ function addNumbers(className){
  * @param {class} className 
  */
 function getAllNumber(className){
-    const arr = document.getElementsByClassName(className);
+    const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         console.log(arr[i].number);
     }
@@ -194,7 +229,7 @@ function getAllNumber(className){
  * @param {class} className 
  */
 function printNumber(className){
-    const arr = document.getElementsByClassName(className);
+    const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         arr[i].textContent = arr[i].number;
     }

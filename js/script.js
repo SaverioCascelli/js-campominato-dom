@@ -49,6 +49,7 @@ function init(numberOfBox, boxInRow){
     for(let i = 0 ; i < numberOfBox ; i++){
         colBox.append(createBox(boxInRow));
     }
+    setUpBombs();
 }
 
 /**
@@ -91,10 +92,6 @@ function randomBombSpot(arr){
     return bombSpotArr;
 }
 
-let arris = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10];
-
-console.log("arris" , randomBombSpot(arris));
-
 /**
  * return a random number between min and max (included)
  * @param {number} min 
@@ -103,6 +100,34 @@ console.log("arris" , randomBombSpot(arris));
  */
 function random(min, max){
     return Math.floor(Math.random() * (max- min +1) + 1);
+}
+
+
+function setUpBombs(){
+    let boxArr = getBoxArr();
+    let bombArr = randomBombSpot(boxArr);
+    for(let i = 0; i < bombArr.length; i++){
+        const bombInBox = bombArr[i];
+        getBoxByNumber(bombInBox).bomb = true;
+    }
+}
+
+function getBoxArr(){
+    return document.getElementsByClassName("box");
+}
+
+/**
+ * given a number return the equivalent box
+ * @param {*} number 
+ * @returns 
+ */
+function getBoxByNumber(number){
+    const arr = document.getElementsByClassName("box");
+    for(let i = 0 ; i < arr.length; i ++){
+        if (number === arr[i].number){
+            return arr[i];
+        }
+    }
 }
 
 

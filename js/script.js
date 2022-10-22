@@ -81,10 +81,16 @@ function createBox(boxPerRow){
             freeze();
 
         }else{
-        div.classList.add("bg-primary")
+        div.classList.add("bg-primary");
         scoreRow.classList.remove("d-none");
         score++;
-        scoreP.textContent = `Punteggio : ${score}`;
+        if (score === getBoxArr().length - BOMBS){
+            console.log(getBoxArr().length);
+            scoreP.textContent = `Hai Vinto!!!`
+        }else{
+            scoreP.textContent = `Punteggio : ${score}`;
+        }
+        
     }
     })
     return div

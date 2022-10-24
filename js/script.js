@@ -28,9 +28,13 @@ let score = 0;
  */
 initBtn.addEventListener("click", function(){
     const selectOption = parseInt(document.querySelector("header select").value);
+
+    //reset HTML
     colBox.innerHTML="";
-    score = 0;
+     score = 0;
     scoreRow.classList.add("d-none");
+
+    //start selected game difficulty
     switch (selectOption){
         case 1:
             init(100, 10);
@@ -71,6 +75,7 @@ function createBox(boxPerRow){
     setNumber(div);
     div.addEventListener("click", function()
     {
+        //on bomb click  shows up all bombs 
         if(isBomb(this)){
             const bombArr= getAllBomb();
             for(let i = 0; i< bombArr.length; i++){
@@ -92,7 +97,7 @@ function createBox(boxPerRow){
         }
         
     }
-    })
+    } , { once: true })
     return div
 }
 
@@ -124,7 +129,7 @@ function getAllBomb(){
 
 
 /**
- * given an arr  return an array of random number the same length of BOMBS
+ * given an arr  return an array of random number (between 1 and arr.length) 
  * arr.lenght cant be > of BOMBS
  * @param {array} arr 
  * @returns 
@@ -155,9 +160,9 @@ function random(min, max){
 }
 
 /**
- * take arr of box
+ * 
  * create a random array of bomb position
- * set up bombs in box ??attribute??
+ * set up bombs in box parameters
  */
 function setUpBombs(){
     let boxArr = getBoxArr();
@@ -240,7 +245,7 @@ function addSequentialNumber(item){
  * add a sequential serie of number in every class item from 0
  * @param {class} className 
  */
-function addNumbers(className){
+function addNumbers(){
     const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         arr[i].number = i+1;
@@ -251,18 +256,18 @@ function addNumbers(className){
  * get a console log of every class item number in html
  * @param {class} className 
  */
-function getAllNumber(className){
+function getAllNumber(){
     const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         console.log(arr[i].number);
     }
-}
+}$
 
 /**
  * set the number of every class item in it's textContent
  * @param {class} className 
  */
-function printNumber(className){
+function printNumber(){
     const arr = getBoxArr();
     for(let i = 0 ; i < arr.length; i ++){
         arr[i].textContent = arr[i].number;
